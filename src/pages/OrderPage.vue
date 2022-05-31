@@ -58,7 +58,7 @@ import axios from 'axios'
                 this.offers = this.order.offers;
             },
             async createOffer(offer) {
-                const response = await axios.post('http://127.0.0.1:8000/offers/', {
+                const response = await axios.post('https://bsm-backend.herokuapp.com/offers/', {
                     quantity: offer.quantity,
                     price: offer.price,
                     order_id: this.order.order_id,
