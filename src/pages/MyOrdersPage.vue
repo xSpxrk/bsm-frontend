@@ -5,7 +5,7 @@
             <div class="offers">
                 <h1 class="title">Мои заказы</h1>
                 <div class="items">
-                    <order-main v-for="order in this.orders.reverse()" :order="order" :key="order.order_id"></order-main>
+                    <order-main v-for="order in this.orders" :order="order" :key="order.order_id"></order-main>
             </div>
             </div>
         </div>
@@ -41,6 +41,7 @@ import axios from 'axios'
                 })
                 this.customer = response.data;
                 this.orders = this.customer.orders;
+				this.orders = this.orders.reverse();
             }
         },
         mounted() {

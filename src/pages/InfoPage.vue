@@ -193,7 +193,7 @@ import axios from 'axios'
         },
         mounted() {
           if (localStorage.token){
-            this.token = localStorage.token
+            this.$router.push('/main')
           }
         },
     }

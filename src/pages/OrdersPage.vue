@@ -5,10 +5,10 @@
             <div class="orders">
                 <h1 class="title__customer">Заказы</h1>
                 <div class="items">
-                    <order-main v-for="order in this.orders.reverse()" :order="order" :key="order.order_id"></order-main>
+                    <order-main v-for="order in this.orders" :order="order" :key="order.order_id"></order-main>
                 </div>
             </div>
-        <div ref="observer" class="observer"></div>
+		<div ref="observer" class="observer"></div>
         </div>
     </div>
 </template>
@@ -42,10 +42,11 @@ import axios from 'axios'
                     }
 
                 });
-                this.orders = [...this.orders, ...response.data].sort((a, b) => a.offer_id > b.offer_id ? 1 : -1).reverse();
+                this.orders = [...this.orders, ...response.data];
                 
                 this.skip = this.limit;
                 this.limit += 1;
+				this.orders = this.orders.reverse();
             },
             async getMax() {
                 const max = await axios.get('https://bsm-backend.herokuapp.com/orders/max/');
@@ -56,7 +57,7 @@ import axios from 'axios'
         mounted() {
             this.getOrders();
             this.getMax();
-            const options = {
+			const options = {
             rootMargin: '0px',
             threshold: 1.0
             }

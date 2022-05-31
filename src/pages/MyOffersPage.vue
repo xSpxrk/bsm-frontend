@@ -5,7 +5,7 @@
             <div class="offers">
                 <h1 class="title">Мои предложения</h1>
                 <div class="items">
-                    <offer-main v-for="offer in this.offers.reverse()" :offer="offer" :key="offer.offer_id"></offer-main>
+                    <offer-main v-for="offer in this.offers" :offer="offer" :key="offer.offer_id"></offer-main>
             </div>
             </div>
         </div>
@@ -41,6 +41,7 @@ import axios from 'axios'
                 })
                 this.provider = response.data
                 this.offers = this.provider.offers;
+				this.offers = this.offers.reverse();
             }
         },
         mounted() {

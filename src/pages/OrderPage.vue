@@ -5,7 +5,7 @@
                 <h1 class="title">Заказ</h1>
                 <div class="items">
                     <order :order="this.order"></order>
-                    <offer v-for="offer in offers.reverse()" :offer="offer" :key="offer.offer_id"></offer>
+                    <offer v-for="offer in offers" :offer="offer" :key="offer.offer_id"></offer>
                 </div>
         </div>
     </div>
@@ -18,7 +18,7 @@
                 <h1 class="title">Заказ</h1>
                 <div class="items">
                     <order  @openDialog="openDialog" class="main_order" :order="this.order"></order>
-                    <offer v-for="offer in offers.reverse()" :offer="offer" :key="offer.offer_id"></offer>
+                    <offer v-for="offer in offers" :offer="offer" :key="offer.offer_id"></offer>
                 </div>
         </div>
     </div>
@@ -56,6 +56,7 @@ import axios from 'axios'
                 const response = await axios.get('https://bsm-backend.herokuapp.com/orders/' + id );
                 this.order = response.data;
                 this.offers = this.order.offers;
+				this.offers = this.offers.reverse();
             },
             async createOffer(offer) {
                 const response = await axios.post('https://bsm-backend.herokuapp.com/offers/', {

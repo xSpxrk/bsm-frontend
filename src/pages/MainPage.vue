@@ -5,7 +5,7 @@
             <div class="orders">
                 <h1 class="title__customer">Последние заказы</h1>
                 <div class="items">
-                    <order-main v-for="order in this.sortOrders().slice(0, 3)" :order="order" :key="order.order_id"></order-main>
+                    <order-main v-for="order in this.orders" :order="order" :key="order.order_id"></order-main>
             </div>
             </div>
            
@@ -17,7 +17,7 @@
             <div class="offers">
                 <h1 class="title__provider">Последние предложения</h1>
                 <div class="items">
-                    <offer-main v-for="offer in this.sortOffers().slice(0, 3)" :offer="offer" :key="offer.offer_id"></offer-main>
+                    <offer-main v-for="offer in this.offers" :offer="offer" :key="offer.offer_id"></offer-main>
             </div>
             </div>
         </div>
@@ -52,6 +52,8 @@ import axios from 'axios'
                     }
                 });
                 this.orders = response.data.orders;
+				this.orders = this.orders.reverse();
+				this.orders = this.orders.slice(0, 3);
                 console.log(response);
             },
             async getOffers() {
@@ -62,6 +64,8 @@ import axios from 'axios'
                 }
                 );
                 this.offers = response.data.offers;
+				this.offers = this.offers.reverse();
+				this.offers = this.offers.slice(0, 3);
                 console.log(response)
             },
             sortOffers() {
