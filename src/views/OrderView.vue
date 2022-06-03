@@ -1,0 +1,116 @@
+<template>
+    <div class="main" >
+        <customer-nav-bar v-if="this.type == 'customer'"></customer-nav-bar>
+        <provider-nav-bar v-else></provider-nav-bar>
+        <dialog-window v-model:show="offerVisible">
+          <create-offer @offer="createOffer"></create-offer>
+        </dialog-window>
+             <div class="order_main">
+                <h1 class="title">Заказ</h1>
+                <div class="items">
+                    <order :order="this.order" @openDialog="openDialog"></order>
+                    <offer v-for="offer in offers" :offer="offer" :key="offer.offer_id"></offer>
+                </div>
+        </div>
+    </div>
+
+</template>
+
+<script>
+import ProviderNavBar from '@/components/HomeProviderView/ProviderNavBar.vue'
+import CustomerNavBar from '@/components/HomeCustomerView/CustomerNavBar.vue'
+import Order from '@/components/HomeCustomerView/Order.vue'
+import Offer from '@/components/HomeProviderView/Offer.vue'
+import CreateOffer from '@/components/HomeProviderView/CreateOffer.vue'
+import axios from 'axios'
+    export default {
+        components: {
+            CustomerNavBar,
+            ProviderNavBar,
+            Order,
+            Offer,
+            CreateOffer
+        },
+        data() {
+            return {
+                type: localStorage.type,
+                id: 0,
+                order: Object,
+                offers: [],
+                offerVisible: false,
+            }
+        },
+        methods: {
+            getId() {
+                return parseInt(this.$route.params.id);
+            },
+            async getOrder(id) {
+                const response = await axios.get('https://backend-bsm.herokuapp.com/orders/' + id );
+                this.order = response.data;
+                this.offers = this.order.offers;
+				this.offers = this.offers.reverse();
+            },
+            async createOffer(offer) {
+                const response = await axios.post('https://backend-bsm.herokuapp.com/offers/', {
+                    quantity: offer.quantity,
+                    price: offer.price,
+                    order_id: this.order.order_id,
+                    provider_id: null
+                },
+                {
+                    params: {
+                        token: localStorage.token
+                    },
+                });
+                this.getOrder(this.$route.params.id);
+                this.offerVisible = false;
+        
+            },
+            openDialog(show) {
+                this.offerVisible = show;
+            }
+        },
+        mounted() {
+            this.getId();
+            this.getOrder(this.getId());
+        },
+        
+    }
+</script>
+
+<style scoped>
+.main {
+    width: 100%;
+    height: 100%;
+}
+.background {
+    background: url("@/resources/images/orders_rectangle.svg") no-repeat;
+    height: 100%;
+}
+.order_main {
+    padding: 20px 0;
+    margin: 0 auto;
+    width: 1440px;
+    height: 100%;
+}
+.title {
+    width: 100%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 61px;
+    text-align: center;
+
+    color: #3F4155;
+}
+.items {
+    width: 100%;
+    height: 100%;
+}
+@media screen and (max-width: 1440px) {
+    .order_main {
+        width: 100%;
+    }
+}
+</style>

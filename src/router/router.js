@@ -1,46 +1,51 @@
-import InfoPage from "@/pages/InfoPage.vue";
-import MainPage from '@/pages/MainPage.vue';
-import ProfilePage from '@/pages/ProfilePage.vue';
-import OffersPage from '@/pages/MyOffersPage.vue';
-import OrdersPage from '@/pages/OrdersPage.vue';
-import OrderPage from '@/pages/OrderPage.vue';
-import MyOrdersPage from '@/pages/MyOrdersPage.vue';
-import {createRouter, createWebHistory} from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router'
+import MainView from '@/views/MainView.vue'
+import HomeCustomerView from '@/views/HomeCustomerView.vue'
+import HomeProviderView from '@/views/HomeProviderView.vue'
+import MyOffersView from '@/views/MyOffersView.vue'
+import MyOrdersView from '@/views/MyOrdersView.vue'
+import OrdersView from '@/views/OrdersView.vue'
+import OrderView from '@/views/OrderView.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 const routes = [
-    {
-        path: '/',
-        component: InfoPage,
-    },
-    {
-        path: '/main',
-        component: MainPage
-    },
-    {
-        path: '/profile',
-        component: ProfilePage
-    },
-    {
-        path: '/offers',
-        component: OffersPage
-    },
-    {
-        path: '/orders',
-        component: OrdersPage
-    },
-    {
-        path: '/order/:id',
-        component: OrderPage
-    },
-    {
-        path: '/my_orders',
-        component: MyOrdersPage
-    }
+  {
+      path: '/',
+      component: MainView,
+  },
+  {
+      path: '/home_customer',
+      component: HomeCustomerView
+  },
+  {
+    path: '/home_provider',
+    component: HomeProviderView
+  },
+  {
+      path: '/profile',
+      component: ProfileView
+  },
+  {
+      path: '/offers',
+      component: MyOffersView
+  },
+  {
+      path: '/orders',
+      component: OrdersView
+  },
+  {
+      path: '/order/:id',
+      component: OrderView
+  },
+  {
+      path: '/my_orders',
+      component: MyOrdersView
+  }
 ]
 
 const router = createRouter({
-    routes,
-    history: createWebHistory(process.env.BASE_URL)
+  history: createWebHistory(process.env.BASE_URL),
+  routes
 })
 
-export default router;
+export default router

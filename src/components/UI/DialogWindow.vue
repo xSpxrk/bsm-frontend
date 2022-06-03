@@ -40,7 +40,12 @@
     background: white;
     border-radius: 70px;
     min-height: 50px;
-    min-width: 720px;
     max-width: 1000px;
+}
+
+@media screen and (max-width: 425px) {
+        .dialog__content {
+            border-radius: 0;
+        }
 }
 </style>
