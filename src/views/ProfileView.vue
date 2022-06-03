@@ -27,6 +27,7 @@
 <script>
 import ProviderNavBar from '@/components/HomeProviderView/ProviderNavBar.vue'
 import CustomerNavBar from '@/components/HomeCustomerView/CustomerNavBar.vue'
+import Swal from 'sweetalert2'
 import axios from 'axios'
     export default {
         components: {
@@ -65,7 +66,7 @@ import axios from 'axios'
                         }
 
                     });
-                    this.$swal.fire({
+                    Swal.fire({
                             icon: 'success',
                             title: 'Данные успешно изменены',
                             showConfirmButton: false,
@@ -76,7 +77,7 @@ import axios from 'axios'
                     const response = error.response;
                     if (response.status == 422) {
                         if (response.data.detail[0].loc[1] == 'phone_number') {
-                            this.$swal.fire({
+                            Swal.fire({
                                 icon: 'error',
                                 title: 'Неправильный формат номера телефона',
                                 showConfirmButton: false,
@@ -85,7 +86,7 @@ import axios from 'axios'
                         } 
                         
                     } else {
-                         this.$swal.fire({
+                         Swal.fire({
                                 icon: 'error',
                                 title: 'Неизвестная ошибка',
                                 showConfirmButton: false,

@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import InputItem from '@/components/UI/InputItem.vue'
     export default {
         components: { InputItem },
@@ -49,7 +50,7 @@ import InputItem from '@/components/UI/InputItem.vue'
                             repeated_password: ''
                         }
                     } else {
-                        this.$swal.fire({
+                        Swal.fire({
                             icon: 'error',
                             title: 'Пароли не совпадают',
                             showConfirmButton: false,
@@ -57,7 +58,7 @@ import InputItem from '@/components/UI/InputItem.vue'
                             })
                     }
                 } else {
-                    this.$swal.fire({
+                    Swal.fire({
                         icon: 'error',
                         title: 'Заполните все поля',
                         showConfirmButton: false,

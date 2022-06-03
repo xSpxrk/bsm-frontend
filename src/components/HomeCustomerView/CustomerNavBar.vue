@@ -31,6 +31,7 @@
 <script>
 import CreateOrderDialog from '@/components/HomeCustomerView/CreateOrderDialog.vue'
 import axios from 'axios'
+import Swal from 'sweetalert2'
     export default {
         components: {
             CreateOrderDialog
@@ -72,19 +73,19 @@ import axios from 'axios'
                 });
                 this.order = response.data;
                 this.show = false;
-                this.$swal.fire({
+                Swal.fire({
                     icon: 'success',
                     title: 'Заказ успешно создан',
                 })
                 this.$emit('refresh', true)
                 } catch (error){
                     if (error.response.status == 422){
-                        this.$swal.fire({
+                        Swal.fire({
                         icon: 'error',
                         title: 'Введены неправильно данные',
                     })
                     } else {
-                        this.$swal.fire({
+                        Swal.fire({
                         icon: 'error',
                         title: 'Неизвестная ошибка',
                         timer: 1500

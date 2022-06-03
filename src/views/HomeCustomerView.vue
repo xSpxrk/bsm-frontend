@@ -16,6 +16,7 @@
 <script>
 import CustomerNavBar from '@/components/HomeCustomerView/CustomerNavBar.vue'
 import OrderMain from '@/components/HomeCustomerView/OrderMain.vue'
+import Swal from 'sweetalert2'
 import axios from 'axios'
     export default {
         components: {
@@ -40,7 +41,7 @@ import axios from 'axios'
                     this.orders = this.orders.slice(0, 3);
                     console.log(response);
                 } catch(error) {
-                    this.$swal.fire({
+                    Swal.fire({
                         icon: 'error',
                         title: 'Не удалось загрузить последние заказы',
                         showConfirmButton: true,

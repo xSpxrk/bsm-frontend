@@ -12,6 +12,7 @@
 
 <script>
 import InputItem from '@/components/UI/InputItem.vue'
+import Swal from 'sweetalert2'
     export default {
         components: { InputItem },
         data() {
@@ -31,7 +32,12 @@ import InputItem from '@/components/UI/InputItem.vue'
                             quantity: ''
                         }
                 } else {
-                    alert("Заполните все поля")
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Заполните все поля',
+                        showConfirmButton: false,
+                        timer: 1000
+                        })
                 }
                 
             }

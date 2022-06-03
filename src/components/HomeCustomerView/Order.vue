@@ -43,7 +43,7 @@ import axios from 'axios'
             },
             async deleteOrder() {
                 const response = await axios.delete('https://bsm-backend.herokuapp.com/orders/'+ this.order.order_id);
-            this.$router.back();
+                this.$router.back();
                 
             }
         },

@@ -16,6 +16,7 @@
 <script>
 import OrderMain from '@/components/HomeCustomerView/OrderMain.vue'
 import CustomerNavBar from '@/components/HomeCustomerView/CustomerNavBar.vue'
+import Swal from 'sweetalert2'
 import axios from 'axios'
     export default {
         components: {
@@ -42,7 +43,7 @@ import axios from 'axios'
                 this.orders = this.customer.orders;
 				this.orders = this.orders.reverse();
                 } catch (error) {
-                     this.$swal.fire({
+                     Swal.fire({
                         icon: 'error',
                         title: 'Не удалось загрузить ваши заказы',
                         showConfirmButton: true,
