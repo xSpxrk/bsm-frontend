@@ -45,6 +45,7 @@
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 .service {
     width: 100%;
     height: 500px;
@@ -57,7 +58,7 @@
 }
 .service__title {
     text-align: center;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 60px;
@@ -112,7 +113,7 @@
     height: 100%;
 }
 .service_item__title {
-  font-family: 'Inter';
+  font-family: 'Balsamiq Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 30px;
@@ -123,7 +124,7 @@
 .service_item__subtitle {
     height: 83px;
     margin: 21px 0 0 0;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -136,6 +137,7 @@
 
 }
 .service_item__button {
+    font-family: 'Balsamiq Sans';
     align-items: center;
     text-decoration: none;
     color: #FAF6ED;

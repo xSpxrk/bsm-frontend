@@ -1,7 +1,9 @@
 <template>
     <div class="order">
         <div class="title">
-            <div class="name">{{ this.customer.name }}</div>
+            <div class="name">
+                <div class="name__text" @click="$router.push(`/customer/${order.customer_id}`)"><span>{{ this.customer.name }} ☚</span></div>
+            </div>
             <div class="btn">
                 <div @click="letOffer" v-show="this.type == 'provider'">Оставить предложение</div>
                 <div @click="deleteOrder" v-show="this.type == 'customer'">Удалить заказ</div>
@@ -30,7 +32,7 @@ import axios from 'axios'
         data() {
             return {
                 customer: '',
-                type: localStorage.type
+                type: localStorage.type,
             }
         },
         methods: {
@@ -72,7 +74,7 @@ import axios from 'axios'
 }
 .title {
     display: flex;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -82,7 +84,19 @@ import axios from 'axios'
 }
 .name {
     flex: 1;
+    display: flex;
+    justify-content: flex-start;
+
 }
+.name__text {
+    cursor: pointer;
+    transition: 0.5s;   
+}
+.name__text:hover {
+    color:#DF7373;
+    transform: translate(0, -10px);
+}
+
 .arrow {
     display: flex;
     justify-content: end;
@@ -94,7 +108,7 @@ import axios from 'axios'
 }
 .description {
     word-wrap: break-word;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
@@ -105,7 +119,7 @@ import axios from 'axios'
 }
 .material {
     flex: 1;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -118,7 +132,7 @@ import axios from 'axios'
     flex: 1;
     justify-content: end;
     display: flex;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -140,6 +154,7 @@ import axios from 'axios'
     border-radius: 12px;
     cursor: default;
     transition-duration: 0.5s;
+    cursor: pointer;
 }
 .btn:active {
     background: #F5F5F5;
@@ -177,4 +192,10 @@ import axios from 'axios'
         padding: 10px;
     }
 }
+@media screen and (max-width: 330px) {
+    .btn {
+        font-size: 10px;
+    }
+}
+
 </style>

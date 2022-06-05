@@ -33,7 +33,7 @@
                 <div class="advantages_inner_element_content__title">База заказчиков</div>
                 <div class="advantages_inner_element_content__subtitle">Тысяча заказчиков вашей продукции</div>
               </div>
-               <div class="advantages_inner_element__content">
+               <div class="advantages_inner_element__content" id="anytime">
                 <img class="advantages_inner_element_content__icon" src="@/resources/images/clock.svg"/>
                 <div class="advantages_inner_element_content__title">Работа в любое время</div>
                 <div class="advantages_inner_element_content__subtitle">Работа с заявками в любой момент</div>
@@ -51,6 +51,7 @@
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 .advantages {
   display: block;
   height: 1000px;
@@ -72,7 +73,7 @@
 .advantages_inner__title {
   width: 25%;
   align-self: center;
-  font-family: 'Inter';
+  font-family: 'Balsamiq Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 55px;
@@ -88,15 +89,20 @@
   justify-content: space-between;
 
 }
+#anytime {
+  margin: 0 20px 0 0
+}
 .advantages_inner_element__content {
   width: 30%;
 }
 .advantages_inner_element_content__icon {
   height: 93px;
   width: 100px;
+  margin: 0 0 24px 0;
+  
 }
 .advantages_inner_element_content__title {
-  font-family: 'Inter';
+  font-family: 'Balsamiq Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 40px;
@@ -106,7 +112,7 @@
 }
 .advantages_inner_element_content__subtitle {
   margin: 10px 0 0 0;
-  font-family: 'Inter';
+  font-family: 'Balsamiq Sans';
   font-style: normal;
   font-weight: 400;
   font-size: 30px;
@@ -117,6 +123,11 @@
 @media screen and (max-width: 1440px) {
     .advantages__inner {
         width: 100%;
+    }
+}
+@media screen and (min-width: 1140px) and (max-width: 1400px) {
+    .advantages_inner__title {
+        font-size: 40px;
     }
 }
 @media screen and (max-width: 1140px) {
@@ -179,6 +190,11 @@
     }
     .advantages_inner_element_content__title {
         font-size: 30px;
+    }
+}
+@media screen and (max-width: 350px) {
+    #hide_title {
+      font-size: 35px;
     }
 }
 </style>

@@ -3,7 +3,7 @@
         <provider-nav-bar></provider-nav-bar>
         <div class="background">
             <div class="offers">
-                <h1 class="title">Последние предложения</h1>
+                <h1 class="title">Мои последние предложения</h1>
                 <div class="items">
                     <offer-main v-for="offer in this.offers" :offer="offer" :key="offer.offer_id"></offer-main>
             </div>
@@ -74,7 +74,7 @@ import axios from 'axios'
 }
 .title {
     width: 100%;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 50px;

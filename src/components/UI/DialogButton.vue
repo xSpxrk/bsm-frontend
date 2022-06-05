@@ -11,11 +11,12 @@
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 .btn {
     background: #DF7373;
     border-radius: 10px;
 
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;

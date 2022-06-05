@@ -11,6 +11,7 @@
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 * {
   margin: 0;
   padding: 0;

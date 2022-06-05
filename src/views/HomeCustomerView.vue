@@ -3,7 +3,7 @@
         <customer-nav-bar @refresh="updateOrders"></customer-nav-bar>
         <div class="background">
             <div class="orders">
-                <h1 class="title">Последние заказы</h1>
+                <h1 class="title">Мои последние заказы</h1>
                 <div class="items">
                     <order-main v-for="order in this.orders" :order="order" :key="order.order_id"></order-main>
             </div>
@@ -61,6 +61,7 @@ import axios from 'axios'
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 .main {
     width: 100%;
     height: 100%;
@@ -72,7 +73,7 @@ import axios from 'axios'
 }
 .title {
     width: 100%;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 50px;

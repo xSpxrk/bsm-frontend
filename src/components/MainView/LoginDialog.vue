@@ -49,12 +49,13 @@ import Swal from 'sweetalert2'
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 .entry {
     padding: 32px 100px;
 }
 .header {
     text-align: center;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 40px;
@@ -70,6 +71,7 @@ import Swal from 'sweetalert2'
 }
 .btn {
    padding: 8px 100px; 
+   margin: 16px 0 0 0;
 }
 @media screen and (max-width: 425px) {
     .entry{

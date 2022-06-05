@@ -7,40 +7,50 @@ import MyOrdersView from '@/views/MyOrdersView.vue'
 import OrdersView from '@/views/OrdersView.vue'
 import OrderView from '@/views/OrderView.vue'
 import ProfileView from '@/views/ProfileView.vue'
+import ProviderView from '@/views/ProviderView.vue'
+import CustomerView from '@/views/CustomerView.vue'
 
 const routes = [
-  {
-      path: '/',
-      component: MainView,
-  },
-  {
-      path: '/home_customer',
-      component: HomeCustomerView
-  },
-  {
-    path: '/home_provider',
-    component: HomeProviderView
-  },
-  {
-      path: '/profile',
-      component: ProfileView
-  },
-  {
-      path: '/offers',
-      component: MyOffersView
-  },
-  {
-      path: '/orders',
-      component: OrdersView
-  },
-  {
-      path: '/order/:id',
-      component: OrderView
-  },
-  {
-      path: '/my_orders',
-      component: MyOrdersView
-  }
+    {
+        path: '/',
+        component: MainView,
+    },
+    {
+        path: '/home_customer',
+        component: HomeCustomerView
+    },
+    {
+        path: '/home_provider',
+        component: HomeProviderView
+    },
+    {
+        path: '/profile',
+        component: ProfileView
+    },
+    {
+        path: '/provider/:id',
+        component: ProviderView
+    },
+    {
+        path: '/customer/:id',
+        component: CustomerView
+    },
+    {
+        path: '/offers',
+        component: MyOffersView
+    },
+    {
+        path: '/orders',
+        component: OrdersView
+    },
+    {
+        path: '/order/:id',
+        component: OrderView
+    },
+    {
+        path: '/my_orders',
+        component: MyOrdersView
+    }
 ]
 
 const router = createRouter({

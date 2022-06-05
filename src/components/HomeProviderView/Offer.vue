@@ -1,6 +1,10 @@
 <template>
     <div class="offer">
-            <div class="name">Поставщик: {{ this.provider.name }}</div>
+            <div class="header">
+                  <div class="name" >Поставщик:</div>
+                  <div class="name_provider" @click="$router.push(`/provider/${offer.provider_id}`)">{{ this.provider.name }} ☚</div>
+            </div>
+          
             <div class="phone">
                 <div class="text">Номер телефона:</div>
                 <div class="number">{{ this.provider.phone_number }}</div>
@@ -72,6 +76,35 @@ import axios from 'axios'
 .name_price {
     display: flex;
 }
+.header {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+.name {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+
+    color: #CCCCCC;
+}
+.name_provider {
+    cursor: pointer;
+    margin: 0 0 0 10px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 36px;
+    transition: 1s;
+    color: #F5F5F5;
+}
+.name_provider:hover {
+    color: #458686;
+    transform: translate(0, -10px);
+}
 .price {
     flex: 1;
     justify-content: flex-end;
@@ -86,16 +119,7 @@ import axios from 'axios'
 
     color: #F5F5F5;
 }
-.name {
-    flex: 1;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 30px;
-    line-height: 36px;
 
-    color: #F5F5F5;
-}
 .phone {
     flex: 1;
     display: flex;

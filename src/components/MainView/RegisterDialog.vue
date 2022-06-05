@@ -73,12 +73,13 @@ import InputItem from '@/components/UI/InputItem.vue'
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 .registration {
     padding: 32px 230px;
 }
 .header {
     text-align: center;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 40px;
@@ -101,8 +102,8 @@ import InputItem from '@/components/UI/InputItem.vue'
     width: 100%;
     background: #D9D9D9;
     border-radius: 10px;
-    
-    font-family: 'Inter';
+    margin: 0 0 16px 0;
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;

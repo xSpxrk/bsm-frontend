@@ -9,7 +9,10 @@
         </div>
         <div class="description">{{ order.description }}</div>
         <div class="info">
-            <div class="material">Материал: {{ order.materials }}</div>
+           <div class="material">
+                <div class="material__text">Материал:</div>
+                <div class="material__name">{{ order.materials }}</div>
+            </div>
             <div class="count">
                 <div class="text">Количество:</div>
                 <div class="counter">{{ order.quantity }}</div>
@@ -48,7 +51,7 @@ import axios from 'axios'
 }
 .title {
     display: flex;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -70,7 +73,7 @@ import axios from 'axios'
 }
 .description {
     word-wrap: break-word;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
@@ -80,21 +83,24 @@ import axios from 'axios'
     color: #6E7080;
 }
 .material {
-    flex: 1;
-    font-family: 'Inter';
+    display: flex;
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
     line-height: 36px;
 
-
     color: #3F4155;
+}
+.material__name {
+    margin: 0 0 0 10px;
+    color: #6E7080;
 }
 .count {
     flex: 1;
     justify-content: end;
     display: flex;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -104,13 +110,14 @@ import axios from 'axios'
     color: #3F4155;
 }
 .counter {
+    color: #6E7080;
     margin: 0 0 0 15px;
 }
 .arrow_img {
     background: url('@/resources/images/arrow.svg') no-repeat;
     width: 55px;
 }
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
     .info {
         display: flex;
         flex-direction: column;

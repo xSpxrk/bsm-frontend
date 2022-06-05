@@ -14,9 +14,15 @@
             </div>
 
         </div>
-            <div class="material">Материал: {{ this.order.materials }}</div>
+            <div class="material">
+                <div class="material__text">Материал:</div>
+                <div class="material__name">{{ this.order.materials }}</div>
+            </div>
         <div class="info">
-            <div class="customer">Заказчик: {{ this.customer }}</div>
+            <div class="customer">
+                <div class="customer__text">Заказчик: </div>
+                <div class="customer__name" @click="$router.push(`/customer/${order.customer_id}`)">{{ this.customer }} ☚</div>  
+            </div>
             <div class="count">
                 <div class="text">Количество:</div>
                 <div class="counter">{{ offer.quantity }}</div>
@@ -76,7 +82,7 @@ import axios from 'axios'
 }
 .title {
     display: flex;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -88,7 +94,7 @@ import axios from 'axios'
     display: flex;
 }
 .price {
-    margin: 0 0 0 32px;
+    margin: 0 0 0 10px;
     display: flex;
     color: #6E7080;
 }
@@ -106,7 +112,7 @@ import axios from 'axios'
 }
 .description {
     word-wrap: break-word;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
@@ -117,7 +123,7 @@ import axios from 'axios'
 }
 .material {
     display: flex;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -125,20 +131,34 @@ import axios from 'axios'
 
     color: #3F4155;
 }
+.material__name {
+    margin: 0 0 0 10px;
+    color: #6E7080;
+}
 .customer {
     flex: 1;
-    font-family: 'Inter';
+    display: flex;
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
     line-height: 36px;
     color: #3F4155;
 }
+.customer__name {
+    margin: 0 0 0 10px;
+    color: #6E7080;
+    cursor: pointer;
+    transition: 1s;
+}
+.customer__name:hover {
+    transform: translate(0, -10px);
+}
 .count {
     flex: 1;
     justify-content: end;
     display: flex;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -149,6 +169,7 @@ import axios from 'axios'
 }
 .counter {
     margin: 0 0 0 15px;
+    color: #6E7080;
 }
 .arrow_img {
     background: url('@/resources/images/arrow.svg') no-repeat;

@@ -4,7 +4,7 @@
             <dialog-window v-model:show="show">
                 <create-order-dialog @order="createOrder"></create-order-dialog>
             </dialog-window>
-            <router-link class="icon" to="/home_provider">БСМ</router-link>
+            <router-link class="icon" to="/home_provider"><span>Биржа строительных материалов</span></router-link>
                 <ul class="navbar__btns">
                 <router-link class="nav__link" to="/offers">Мои предложения</router-link>
                 <router-link class="nav__link" to="/orders">Заказы</router-link>
@@ -51,7 +51,8 @@ import CreateOrderDialog from '@/components/HomeCustomerView/CreateOrderDialog.v
     }
 </script>
 
-<style scoped>@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;400;700&display=swap');
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 li{
     padding: 5px 0;
     width: 100%;
@@ -69,7 +70,7 @@ li{
 .icon {
     color: #5cb25d;
     font-size: 40px;
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Balsamiq Sans', serif;
     font-weight: 400;
     text-decoration: none;
     cursor: default;
@@ -82,7 +83,7 @@ li{
 .navbar__btns {
     margin-left: auto;
     font-size: 15px;
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Balsamiq Sans', serif;
     font-weight: 400;
     color: black;
 }
@@ -128,7 +129,14 @@ li{
         width: 1440px;
     }
 }
-
+@media screen and (max-width: 1100px){
+    .icon span {
+        display: none;
+    }
+    .icon::after {
+        content: 'БСМ'
+    }
+}
 @media screen and (max-width: 768px){
     
     .navbar__btns {

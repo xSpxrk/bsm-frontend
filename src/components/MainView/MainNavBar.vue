@@ -1,7 +1,7 @@
 <template>
     <div class="main_navbar">
         <div class="items">
-            <h1 class="icon">БСМ</h1>
+            <h1 class="icon"><span>Биржа строительных материалов</span></h1>
                 <ul class="navbar__btns">
                 <a class="nav__link" href="#about">О нас</a>
                 <a class="nav__link" href="#service">Для кого</a>
@@ -52,7 +52,8 @@
     }
 </script>
 
-<style scoped>@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;400;700&display=swap');
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 li{
     padding: 5px 0;
 }
@@ -67,8 +68,9 @@ li{
 .icon {
     color: #5cb25d;
     font-size: 40px;
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Balsamiq Sans', serif;
     font-weight: 400;
+    cursor: default;
 }
 .divider {
     margin-top: 2px;
@@ -78,18 +80,18 @@ li{
 .navbar__btns {
     margin-left: auto;
     font-size: 15px;
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Balsamiq Sans', serif;
     font-weight: 400;
-    color: black;
+    color: #3F4155;
 }
 .nav__link {
     text-decoration: none;
     margin-right: 15px;
-    cursor: default;
+    cursor: pointer;
     transition-duration: 0.2s;
 }
 .nav__link:visited {
-    color: black;
+    color: #3F4155;
 }
 
 .nav__link:hover {
@@ -125,6 +127,14 @@ li{
     }
 }
 
+@media screen and (max-width: 1250px){
+    .icon span {
+        display: none;
+    }
+    .icon::after {
+        content: 'БСМ'
+    }
+}
 @media screen and (max-width: 768px){
     
     .navbar__btns {

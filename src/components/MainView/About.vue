@@ -25,6 +25,8 @@
 </script>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
+
 .about {
     margin: 50px 0;
     width: 100%;
@@ -52,7 +54,7 @@
 .about__title {
     flex: 1;
     margin: 52.5px 0;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 60px;
@@ -69,7 +71,7 @@
     align-items: center;
 }
 .about_content__information {
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 30px;
@@ -91,8 +93,9 @@
     background: #FAF6ED;
     border-radius: 12px;
     border: 0;
+    cursor: pointer;
 
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 15px;

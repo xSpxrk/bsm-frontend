@@ -12,7 +12,7 @@
 </script>
 
 <style scoped>
-
+@import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 .footer {
     height: 100%;
     width: 1440px;
@@ -20,7 +20,7 @@
     position: relative;
 }
 .footer__title {
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 100px;

@@ -21,7 +21,6 @@ import Service from '@/components/MainView/Service.vue'
 import Advantages from '@/components/MainView/Advantages.vue'
 import FooterMain from '@/components/MainView/FooterMain.vue'
 import LoginDialog from '@/components/MainView/LoginDialog.vue'
-
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import RegisterDialog from '@/components/MainView/RegisterDialog.vue'
@@ -99,6 +98,7 @@ import RegisterDialog from '@/components/MainView/RegisterDialog.vue'
                                     title: 'Вы успешно зарегистрировались',
                                 })
                         }
+                        this.showRegistration = false;
                     } catch (error){
                         if (error.response.status == 422) {
                             if (error.response.data.detail[0].loc[1] == 'phone_number') {

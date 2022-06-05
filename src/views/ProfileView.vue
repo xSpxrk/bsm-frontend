@@ -1,21 +1,36 @@
 <template>
     <div class="main">
-        <customer-nav-bar v-show="this.type == 'customer'"></customer-nav-bar>
-                <provider-nav-bar v-show="this.type == 'provider'"></provider-nav-bar>
+        <customer-nav-bar v-if="this.type == 'customer'"></customer-nav-bar>
+                <provider-nav-bar v-else></provider-nav-bar>
         <div class="background">
-            <h1 class="title">Профиль</h1>
+            <h1 class="title">Ваш профиль</h1>
             <div class="inner">
                 <div class="items">
-                    <h1 class="text">Наименование</h1>
-                    <input-item class="input" v-model="user.name"></input-item>
-                    <h1 class="text" >Почта</h1>
-                    <input-item class="input" v-model="user.email" readonly></input-item>
-                    <h1 class="text">Телефон</h1>
-                    <input-item class="input" type='tel' v-model="user.phone_number"></input-item>
-                    <h1 class="text">Новый пароль</h1>
-                    <input-item class="input"  v-model="this.password" type="password"></input-item>
-                    <div class="button">
-                        <div class="btn" @click="updateUser">Сохранить</div>
+                    <div class="information">
+                        <h1 class="text">Наименование</h1>
+                        <input-item class="input" v-model="user.name"></input-item>
+                        <h1 class="text" >Почта</h1>
+                        <input-item class="input" v-model="user.email" readonly></input-item>
+                        <h1 class="text">Телефон</h1>
+                        <input-item class="input" type='tel' v-model="user.phone_number"></input-item>
+                        <h1 class="text">Новый пароль</h1>
+                        <input-item class="input"  v-model="this.password" type="password"></input-item>
+                        <div class="footer">
+                             <div class="rating">
+                                <div class="img_star"></div>
+                                <div class="rating__number">{{ this.rating.rating }}</div>
+                            </div>
+                            <div class="button">
+                            <div class="btn" @click="updateUser">Сохранить</div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="feedback">
+                        <h1 class="feedback__title">Отзывы</h1>
+                        <div class="scroll">
+                            <feedback-item v-for="review in user.reviews" :review="review" :key="review.review_id"></feedback-item>
+                        </div>
+                        
                     </div>
                 </div>
                 
@@ -27,18 +42,21 @@
 <script>
 import ProviderNavBar from '@/components/HomeProviderView/ProviderNavBar.vue'
 import CustomerNavBar from '@/components/HomeCustomerView/CustomerNavBar.vue'
+import FeedbackItem from '@/components/FeedbackView/FeedbackItem.vue'
 import Swal from 'sweetalert2'
 import axios from 'axios'
     export default {
         components: {
             CustomerNavBar,
-            ProviderNavBar
+            ProviderNavBar,
+            FeedbackItem
         },
         data() {
             return {
                 type: localStorage.type,
                 user: Object,
-                password: ''
+                password: '',
+                rating: 0
             }
 
 
@@ -95,10 +113,19 @@ import axios from 'axios'
                     }
                 }
 
+            },
+            async getRating() {
+                const response = await axios.get('https://backend-bsm.herokuapp.com/reviews/rating/', {
+                    params: {
+                        token: localStorage.token
+                    }
+                });
+                this.rating = response.data;
             }
         },
         mounted() {
             this.getUser();
+            this.getRating();
         },
         
     }
@@ -110,12 +137,13 @@ import axios from 'axios'
     height: 100%;
 }
 .background {
+    padding: 30px;
     background: url("@/resources/images/profile_rectangle.svg") no-repeat;
     height: 100%;
 }
 .title {
     width: 100%;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 50px;
@@ -128,16 +156,62 @@ import axios from 'axios'
     margin: 0 auto;
     width: 1440px;
     height: 100%;
-    align-items: center;
     display: flex;
     flex-direction: column;
 }
 .items {
-    width: calc(100% - 50%);
+    display: flex;
+    padding: 20px;
+}
+.information {
+    flex: 1
+}
+.footer {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+}
+.rating {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.rating__number {
+    font-family: 'Balsamiq Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+
+    color: #FFFFFF;
+}
+.img_star {
+    background-image: url('@/resources/images/yellow_star.svg');
+    width: 30px;
+    background-position: center;
+    align-self: center;
+    height: 30px;
+}
+.feedback {
+    flex: 1;
+
+}
+.scroll {
+    max-height: 400px;
+    overflow: auto;
+    border-radius: 80px;
+}
+.scroll::-webkit-scrollbar { /* webkit */
+    width: 0;
+    height: 0;
+}
+.feedback__title {
+    font-family: 'Balsamiq Sans';
+    text-align: center;
+    color: white;
 }
 .input {
     background: #FFFFFF;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
@@ -146,14 +220,13 @@ import axios from 'axios'
     color: #3F4155;
 }
 .text {
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 25px;
     color: #FFFFFF;
     }
 .button {
-    width: 100%;
     display: flex;
     justify-content: flex-end;
 }
@@ -162,7 +235,7 @@ import axios from 'axios'
     background: #458686;
     border-radius: 10px;
 
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -191,6 +264,33 @@ import axios from 'axios'
     }
     .btn {
         width: 100%;
+    }
+}
+@media screen and (max-width: 788px) {
+    .items {
+        flex-direction: column;
+    }
+    .scroll {
+        border-radius: 0;
+    }
+}
+@media screen and (max-width: 788px) {
+    .footer {
+        flex-direction: column;
+    }
+    .rating {
+        align-self: flex-start;
+    }
+}
+@media screen and (max-width: 650px) {
+    .feedback {
+        width: 100%;
+    }
+    .scroll {
+        border-radius: 0;
+    }
+    .items {
+        padding: 0;
     }
 }
 </style>

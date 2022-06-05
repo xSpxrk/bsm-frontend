@@ -9,7 +9,20 @@
                 <h1 class="title">Заказ</h1>
                 <div class="items">
                     <order :order="this.order" @openDialog="openDialog"></order>
-                    <offer v-for="offer in offers" :offer="offer" :key="offer.offer_id"></offer>
+                    <div class="utils">
+                        <div class="offers__title">Предложения:</div>
+                            <select class="type" v-model="selectedSort">
+                                <option disabled value="" class="option">Сортировка</option>
+                                <option class="option">Дата↑</option>
+                                <option class="option">Дата↓</option>
+                                <option class="option">Цена↑</option>
+                                <option class="option">Цена↓</option>
+                            </select>
+                    </div>
+                    <div class="offers">
+                        <offer v-for="offer in offers" :offer="offer" :key="offer.offer_id"></offer>
+                    </div>
+                    
                 </div>
         </div>
     </div>
@@ -38,6 +51,7 @@ import axios from 'axios'
                 order: Object,
                 offers: [],
                 offerVisible: false,
+                selectedSort: '',
             }
         },
         methods: {
@@ -68,12 +82,39 @@ import axios from 'axios'
             },
             openDialog(show) {
                 this.offerVisible = show;
+            },
+            sortOffersByPriceDown() {
+                this.offers.sort((a, b) => b.price - a.price)
+            },
+            sortOffersByPriceUp() {
+                this.offers.sort((a, b) => a.price - b.price)
+            },
+            sortOffersByDateDown() {
+                this.offers.sort((a, b) => b.offer_id - a.offer_id)
+            },
+            sortOffersByDateUp() {
+                this.offers.sort((a, b) => a.offer_id - b.offer_id)
             }
         },
         mounted() {
             this.getId();
             this.getOrder(this.getId());
         },
+        watch: {
+            selectedSort(newValue) {
+                if (newValue == 'Дата↑') {
+                    this.sortOffersByDateUp();
+                } else if (newValue == 'Дата↓') {
+                    this.sortOffersByDateDown();
+                } else if (newValue == 'Цена↑') {
+                    this.sortOffersByPriceUp();
+                } else {
+                    this.sortOffersByPriceDown();
+
+                }
+
+            }
+        }
         
     }
 </script>
@@ -108,9 +149,57 @@ import axios from 'axios'
     width: 100%;
     height: 100%;
 }
+.offers {
+    max-height: 400px;
+    overflow: auto;
+}
+.offers::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+.utils {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+}
+.offers__title {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 61px;
+
+    color: #3F4155;
+}
+.type {
+    padding: 8px 16px;
+    height: 46px;
+    background: #D9D9D9;
+    border-radius: 10px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #3F4155;
+}
 @media screen and (max-width: 1440px) {
     .order_main {
         width: 100%;
+    }
+}
+@media screen and (max-width: 600px) {
+    .utils {
+        display: block;
+        padding: 20px 0;
+    }
+    .offers__title {
+        margin: 0 0 15px 0;
+    }
+    .title {
+        align-items: center;
     }
 }
 </style>

@@ -4,8 +4,12 @@
         <div class="background">
             <div class="orders">
                 <h1 class="title__customer">Заказы</h1>
+                <div class="search">
+                <input-item v-model="queryOrder" placeholder="Поиск по материалам" class="input"></input-item>
+                </div>
+                
                 <div class="items">
-                    <order-main v-for="order in this.orders" :order="order" :key="order.order_id"></order-main>
+                    <order-main v-for="order in sortedAndSearchedPosts" :order="order" :key="order.order_id"></order-main>
                 </div>
             </div>
 		<div ref="observer" class="observer"></div>
@@ -17,10 +21,12 @@
 import ProviderNavBar from '@/components/HomeProviderView/ProviderNavBar.vue'
 import OrderMain from '@/components/HomeCustomerView/OrderMain.vue'
 import axios from 'axios'
+import InputItem from '@/components/UI/InputItem.vue'
     export default {
         components: {
             ProviderNavBar,
-            OrderMain
+            OrderMain,
+                InputItem
         },
         data() {
             return {
@@ -28,7 +34,8 @@ import axios from 'axios'
                 orders: [],
                 skip: 0,
                 limit: 3,
-                maxOrders: 0
+                maxOrders: 0,
+                queryOrder: ''
             }
         },
         methods: {
@@ -45,7 +52,7 @@ import axios from 'axios'
                 
                 this.skip = this.limit;
                 this.limit += 1;
-				this.orders = this.orders.reverse();
+				// this.orders = this.orders.reverse();
             },
             async getMax() {
                 const max = await axios.get('https://backend-bsm.herokuapp.com/orders/max/');
@@ -68,6 +75,15 @@ import axios from 'axios'
             const observer = new IntersectionObserver(callback, options);
             observer.observe(this.$refs.observer);
         },
+        computed: {
+            sortedPosts() {
+                return [...this.orders].reverse();
+            },
+            sortedAndSearchedPosts() {
+                return this.sortedPosts.filter(order => order.materials.toLowerCase().includes(this.queryOrder.toLowerCase().trim()))
+            }
+        }
+
         
     }
 </script>
@@ -83,13 +99,23 @@ import axios from 'axios'
 }
 .title__customer {
     width: 100%;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 50px;
     line-height: 61px;
     text-align: center;
     color: #FFFFFF;
+}
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+.input {
+    width: 30%;
+    align-self: flex-end;
+    margin: 0 15px;
 }
 .orders {
     padding: 20px 0;
@@ -107,6 +133,22 @@ import axios from 'axios'
 @media screen and (max-width: 1440px) {
     .orders {
         width: 100%;
+    }
+}
+@media screen and (max-width: 900px) {
+    .search {
+        justify-content: flex-start;
+    }
+    .input {
+        width: 50%;
+    }
+}
+@media screen and (max-width: 524px) {
+    .search {
+        justify-content: flex-start;
+    }
+    .input {
+        width: 90%;
     }
 }
 </style>

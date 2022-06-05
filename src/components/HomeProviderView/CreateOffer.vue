@@ -52,7 +52,7 @@ import Swal from 'sweetalert2'
 }
 .header {
     text-align: center;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 40px;
@@ -76,7 +76,7 @@ import Swal from 'sweetalert2'
     background: #D9D9D9;
     border-radius: 10px;
     
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
