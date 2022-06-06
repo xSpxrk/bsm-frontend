@@ -9,6 +9,7 @@ import OrderView from '@/views/OrderView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import ProviderView from '@/views/ProviderView.vue'
 import CustomerView from '@/views/CustomerView.vue'
+import PageNotFound from '@/views/PageNotFound.vue'
 
 const routes = [
     {
@@ -50,6 +51,10 @@ const routes = [
     {
         path: '/my_orders',
         component: MyOrdersView
+    },
+    {
+        path: '/:pathMatch(.*)*',
+        component: PageNotFound
     }
 ]
 
