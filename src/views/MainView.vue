@@ -168,6 +168,7 @@ import ResetPasswordDialog from '@/components/MainView/ResetPasswordDialog.vue'
                                 icon: 'success',
                                 title: 'Новый пароль успешно отправлен к вам на почту',
                             })
+                        this.visibleReset = false;
                     }catch (error) {
                         if (error.response.status == 400) {
                             Swal.fire({
