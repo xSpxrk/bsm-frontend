@@ -23,6 +23,7 @@ import OrderMain from '@/components/HomeCustomerView/OrderMain.vue'
 import axios from 'axios'
 import InputItem from '@/components/UI/InputItem.vue'
     export default {
+        title: 'Заказы',
         components: {
             ProviderNavBar,
             OrderMain,
@@ -77,10 +78,10 @@ import InputItem from '@/components/UI/InputItem.vue'
         },
         computed: {
             sortedPosts() {
-                return [...this.orders].reverse();
+                return [...this.orders];
             },
             sortedAndSearchedPosts() {
-                return this.sortedPosts.filter(order => order.materials.toLowerCase().includes(this.queryOrder.toLowerCase().trim()))
+                return this.sortedPosts.filter(order => order.material.name.toLowerCase().includes(this.queryOrder.toLowerCase().trim()))
             }
         }
 

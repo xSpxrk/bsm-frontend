@@ -16,7 +16,7 @@
         </div>
             <div class="material">
                 <div class="material__text">Материал:</div>
-                <div class="material__name">{{ this.order.materials }}</div>
+                <div class="material__name">{{ this.material }}</div>
             </div>
         <div class="info">
             <div class="customer">
@@ -42,13 +42,15 @@ import axios from 'axios'
         data() {
             return {
                 order: Object,
-                customer: String
+                customer: String,
+                material: String
             }
         },
         methods: {
             async getOrder() {
                 const response = await axios.get('https://backend-bsm.herokuapp.com/orders/' + this.offer.order_id);
                 this.order = response.data;
+                this.material = response.data.material.name;
                 return response.data
             },
             async getCustomer() {

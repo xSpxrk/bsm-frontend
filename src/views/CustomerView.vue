@@ -30,7 +30,7 @@
                     <div class="feedback">
                         <h1 class="feedback__title">Отзывы</h1>
                         <div class="scroll">
-                            <customer-feedback-item v-for="review in user.reviews" :review="review" :key="review.review_id"></customer-feedback-item>
+                            <customer-feedback-item v-for="review in this.reviews" :review="review" :key="review.review_id"></customer-feedback-item>
                         </div>
                         
                     </div>
@@ -49,6 +49,7 @@ import CreateFeedback from '@/components/FeedbackView/CreateFeedback.vue'
 import Swal from 'sweetalert2'
 import axios from 'axios'
     export default {
+        title: 'Страница заказчика',
         components: {
             CustomerNavBar,
             ProviderNavBar,
@@ -63,7 +64,8 @@ import axios from 'axios'
                 rating: 0,
                 user_rating: 0,
                 user_id: parseInt(this.$route.params.id),
-                show: false
+                show: false,
+                reviews: []
             }
 
 
@@ -72,6 +74,7 @@ import axios from 'axios'
             async getCustomer() {
                 const response = await axios.get('https://backend-bsm.herokuapp.com/customers/' + this.user_id);
                 this.user = response.data;
+                this.reviews = response.data.reviews.reverse()
             },
             openCreateFeedback() {
                 this.show = true;

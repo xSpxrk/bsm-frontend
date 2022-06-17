@@ -8,7 +8,7 @@
              <div class="order_main">
                 <h1 class="title">Заказ</h1>
                 <div class="items">
-                    <order :order="this.order" @openDialog="openDialog"></order>
+                    <order :order="this.order" @openDialog="openDialog" :material="this.material"></order>
                     <div class="utils">
                         <div class="offers__title">Предложения:</div>
                             <select class="type" v-model="selectedSort">
@@ -37,6 +37,7 @@ import Offer from '@/components/HomeProviderView/Offer.vue'
 import CreateOffer from '@/components/HomeProviderView/CreateOffer.vue'
 import axios from 'axios'
     export default {
+        title: 'Заказ',
         components: {
             CustomerNavBar,
             ProviderNavBar,
@@ -52,6 +53,7 @@ import axios from 'axios'
                 offers: [],
                 offerVisible: false,
                 selectedSort: '',
+                material: ''
             }
         },
         methods: {
@@ -62,6 +64,7 @@ import axios from 'axios'
                 const response = await axios.get('https://backend-bsm.herokuapp.com/orders/' + id );
                 this.order = response.data;
                 this.offers = this.order.offers;
+                this.material = response.data.material.name;
 				this.offers = this.offers.reverse();
             },
             async createOffer(offer) {
@@ -98,7 +101,10 @@ import axios from 'axios'
         },
         mounted() {
             this.getId();
-            this.getOrder(this.getId());
+            setTimeout(async () => {
+                 this.getOrder(this.getId());
+            }, 500)
+           
         },
         watch: {
             selectedSort(newValue) {

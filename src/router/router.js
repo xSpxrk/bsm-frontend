@@ -15,6 +15,7 @@ const routes = [
     {
         path: '/',
         component: MainView,
+        meta: {title: 'Биржа строительных материалов'}
     },
     {
         path: '/home_customer',

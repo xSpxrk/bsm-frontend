@@ -63,7 +63,7 @@ import Swal from 'sweetalert2'
                     const response = await axios.post('https://backend-bsm.herokuapp.com/orders/', {
                     name: order.name,
                     description: order.description,
-                    materials: order.materials,
+                    material_id: order.material_id,
                     quantity: parseInt(order.quantity)
                 },
                 {

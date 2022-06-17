@@ -19,6 +19,7 @@ import OrderMain from '@/components/HomeCustomerView/OrderMain.vue'
 import Swal from 'sweetalert2'
 import axios from 'axios'
     export default {
+        title: 'Домашняя страница',
         components: {
             CustomerNavBar,
             OrderMain,

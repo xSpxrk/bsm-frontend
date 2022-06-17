@@ -19,6 +19,7 @@ import CustomerNavBar from '@/components/HomeCustomerView/CustomerNavBar.vue'
 import Swal from 'sweetalert2'
 import axios from 'axios'
     export default {
+        title: 'Мои заказы',
         components: {
             OrderMain,
             CustomerNavBar

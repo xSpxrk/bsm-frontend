@@ -8,7 +8,7 @@
         </select>
         <input-item placeholder="Наименование" v-model="user.name" />
         <input-item placeholder="Почта" type="email" v-model="user.email"/>
-        <input-item placeholder="Номер телефона" type="tel" v-model="user.phone"/>
+        <input-item placeholder="Номер телефона" type="tel" v-mask="'+7 (###) ###-##-##'" v-model="user.phone"/>
         <input-item placeholder="Пароль" type="password" v-model="user.password"/>
         <input-item placeholder="Повтор пароля" type="password" v-model="user.repeated_password"/>
         <div class="button">
@@ -21,9 +21,10 @@
 
 <script>
 import Swal from 'sweetalert2'
+import {TheMask} from 'vue-the-mask'
 import InputItem from '@/components/UI/InputItem.vue'
     export default {
-        components: { InputItem },
+        components: { InputItem, TheMask, },
         data() {
             return {
                 user: {
@@ -33,7 +34,15 @@ import InputItem from '@/components/UI/InputItem.vue'
                     phone: '',
                     password: '',
                     repeated_password: ''
-                }
+                },
+                    books: [
+                        { title: "Old Man's War" },
+                        { title: "The Lock Artist" },
+                        { title: "HTML5" },
+                        { title: "Right Ho Jeeves" },
+                        { title: "The Code of the Wooster" },
+                        { title: "Thank You Jeeves" }
+                    ]
             }
         },
         methods: {
@@ -73,6 +82,10 @@ import InputItem from '@/components/UI/InputItem.vue'
 </script>
 
 <style scoped>
+.test {
+    border-radius: 30px;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Balsamiq+Sans:wght@400;700&family=Roboto+Slab:wght@100;400;700&display=swap');
 .registration {
     padding: 32px 230px;

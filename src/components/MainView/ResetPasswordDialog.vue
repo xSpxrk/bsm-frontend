@@ -1,11 +1,9 @@
 <template>
     <div class="entry">
-        <h1 class="header">Авторизация</h1>
-        <input-item placeholder="Почта" type="email" v-model="user.username"/>
-        <input-item placeholder="Пароль" type="password" v-model="user.password"/>
+        <h1 class="header">Восстановление пароля</h1>
+        <input-item placeholder="Почта" type="email" v-model="this.email"/>
         <div class="button">
-            <h1 class="reset_password" @click="reset_password">Восстановить пароль</h1>
-            <button-dialog class="btn" @click="enter">Вход</button-dialog>
+            <button-dialog class="btn" @click="enter">Отправить</button-dialog>
         </div>
 
     </div>
@@ -20,21 +18,15 @@ import Swal from 'sweetalert2'
             },
         data() {
             return {
-                user: {
-                    username: '',
-                    password: ''
-                }
+                email: ''
             }
         },
         
         methods: {
             enter(){
-                if (this.user.username != '' && this.user.password != '') {
-                    this.$emit('login', this.user),
-                    this.user = {
-                        username: '',
-                        password: '',
-                    }
+                if (this.email != '') {
+                    this.$emit('reset', this.email),
+                    this.email = ''
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -44,9 +36,6 @@ import Swal from 'sweetalert2'
                         })
                 }
                
-            },
-            reset_password() {
-                this.$emit('reset', true)
             }
         },
     }
@@ -67,20 +56,12 @@ import Swal from 'sweetalert2'
     margin: 0 0 18px 0;
     color: #3F4155;
 }
-.reset_password {
-    font-family: 'Balsamiq Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 48px;
-    color: #3F4155;
-    cursor: pointer;
-}
+
 .button {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 .btn {
    padding: 8px 100px; 

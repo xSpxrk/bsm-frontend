@@ -6,10 +6,13 @@
         <advantages></advantages>
         <footer-main></footer-main>
         <dialog-window v-model:show="visibleLogin">
-            <login-dialog @login="loginUser"></login-dialog>
+            <login-dialog @login="loginUser" @reset="showResetPassword"></login-dialog>
         </dialog-window>
         <dialog-window v-model:show="visibleRegistration">
             <register-dialog @register="registerUser"></register-dialog>
+        </dialog-window>
+        <dialog-window v-model:show="visibleReset">
+            <reset-password-dialog @reset="resetPassword"></reset-password-dialog>
         </dialog-window>
     </div>
 </template>
@@ -24,7 +27,9 @@ import LoginDialog from '@/components/MainView/LoginDialog.vue'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import RegisterDialog from '@/components/MainView/RegisterDialog.vue'
+import ResetPasswordDialog from '@/components/MainView/ResetPasswordDialog.vue'
     export default {
+        title: 'Биржа строительных материалов',
         components: {
             MainNavBar,
             About,
@@ -32,12 +37,14 @@ import RegisterDialog from '@/components/MainView/RegisterDialog.vue'
             Advantages,
             FooterMain,
             LoginDialog,
-            RegisterDialog
+            RegisterDialog,
+            ResetPasswordDialog
         },
         data() {
             return {
                 visibleLogin: false,
-                visibleRegistration: false
+                visibleRegistration: false,
+                visibleReset: false
             }
         },
             methods: {
@@ -46,6 +53,10 @@ import RegisterDialog from '@/components/MainView/RegisterDialog.vue'
                 },
                 showRegistration() {
                      this.visibleRegistration = true;
+                },
+                showResetPassword() {
+                    this.visibleLogin = false;
+                    this.visibleReset = true;
                 },
                 async loginUser(user) {
                     try {
@@ -129,6 +140,7 @@ import RegisterDialog from '@/components/MainView/RegisterDialog.vue'
                                     icon: 'success',
                                     title: 'Вы успешно зарегистрировались',
                                 })
+                        this.showRegistration = false;
                         }
                         } catch (error){
                         if (error.response.status == 422) {
@@ -146,7 +158,32 @@ import RegisterDialog from '@/components/MainView/RegisterDialog.vue'
                         }
                     }
                     }
-          }
+          },
+                async resetPassword(email) {
+                    try{
+                        const response = await axios.post('https://backend-bsm.herokuapp.com/reset-password', {
+                            email: email
+                        })
+                        Swal.fire({
+                                icon: 'success',
+                                title: 'Новый пароль успешно отправлен к вам на почту',
+                            })
+                    }catch (error) {
+                        if (error.response.status == 400) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Данного пользователя не существует',
+                            })
+                        }
+                        else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Не удалось отправить новый пароль на почту',
+                            })
+                        }
+                    }
+                   
+                }
         },
         mounted() {
             if (localStorage.token != '') {

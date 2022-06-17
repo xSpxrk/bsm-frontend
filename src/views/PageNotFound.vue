@@ -14,6 +14,7 @@
 <script>
 import DialogButton from '@/components/UI/DialogButton.vue'
     export default {
+        title: 'Страница не найдена',
   components: { DialogButton },
         methods: {
             goMain() {

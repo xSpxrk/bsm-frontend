@@ -28,8 +28,9 @@
                     <div class="feedback">
                         <h1 class="feedback__title">Отзывы</h1>
                         <div class="scroll">
-                            <feedback-item v-for="review in user.reviews" :review="review" :key="review.review_id"></feedback-item>
+                            <feedback-item v-for="review in this.reviews" :review="review" :key="review.review_id"></feedback-item>
                         </div>
+                        <!-- <div v-if="user.reviews" class="feedback__title">Список отзывов пуст</div> -->
                         
                     </div>
                 </div>
@@ -46,6 +47,7 @@ import FeedbackItem from '@/components/FeedbackView/FeedbackItem.vue'
 import Swal from 'sweetalert2'
 import axios from 'axios'
     export default {
+        title: 'Мой профиль',
         components: {
             CustomerNavBar,
             ProviderNavBar,
@@ -56,7 +58,8 @@ import axios from 'axios'
                 type: localStorage.type,
                 user: Object,
                 password: '',
-                rating: 0
+                rating: 0,
+                reviews: []
             }
 
 
@@ -69,6 +72,7 @@ import axios from 'axios'
                     }
                 });
                 this.user = response.data;
+                this.reviews = response.data.reviews.reverse()
             },
             async updateUser(){
                 try {

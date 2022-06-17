@@ -12,7 +12,7 @@
         </div>
         <div class="description">{{ order.description }}</div>
         <div class="info">
-            <div class="material">Материал: {{ order.materials }}</div>
+            <div class="material">Материал: {{ this.material }}</div>
             <div class="count">
                 <div class="text">Количество:</div>
                 <div class="counter">{{ order.quantity }}</div>
@@ -27,6 +27,9 @@ import axios from 'axios'
         props: {
             order: {
                 type: Object,
+            },
+            material: {
+                type: String
             }
         },
         data() {
@@ -52,7 +55,7 @@ import axios from 'axios'
         mounted() {
             setTimeout( async () => {
             this.getCustomer(this.order.customer_id);
-            }, 500);
+            }, 1000);
 
         },
         

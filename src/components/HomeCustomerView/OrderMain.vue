@@ -11,7 +11,7 @@
         <div class="info">
            <div class="material">
                 <div class="material__text">Материал:</div>
-                <div class="material__name">{{ order.materials }}</div>
+                <div class="material__name">{{ order.material.name }}</div>
             </div>
             <div class="count">
                 <div class="text">Количество:</div>

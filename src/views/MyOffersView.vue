@@ -18,6 +18,7 @@ import ProviderNavBar from '@/components/HomeProviderView/ProviderNavBar.vue'
 import OfferMain from '@/components/HomeProviderView/OfferMain.vue'
 import axios from 'axios'
     export default {
+        title: 'Мои предложения',
         components: {
             ProviderNavBar,
             OfferMain
