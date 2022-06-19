@@ -69,33 +69,67 @@ import axios from 'axios'
         },
         methods: {
             async getProvider() {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/providers/' + this.user_id);
-                this.user = response.data;
-                this.reviews = response.data.reviews.reverse()
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/providers/' + this.user_id);
+                    this.user = response.data;
+                    this.reviews = response.data.reviews.reverse()
+                } catch {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Не удалось загрузить информацию о поставщике',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+                
             },
             openCreateFeedback() {
                 this.show = true;
             },
             async createFeedback(feedback) {
-                const response = await axios.post('https://backend-bsm.herokuapp.com/reviews', {
-                    description: feedback.description,
-                    rating: feedback.rating,
-                }, {
-                    params: {
-                        token: localStorage.token,
-                        user_id: this.user_id
-                    }
-                });
-                this.show = false;
-                this.getProvider();
+                try {
+                    const response = await axios.post('https://backend-bsm.herokuapp.com/reviews', {
+                        description: feedback.description,
+                        rating: feedback.rating,
+                    }, {
+                        params: {
+                            token: localStorage.token,
+                            user_id: this.user_id
+                        }
+                    });
+                    this.show = false;
+                    this.getProvider();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Отзыв успешно создан',
+                    })
+                } catch {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Не удалось создать отзыв',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+                
             },
             async getRating() {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/reviews/provider_rating/', {
-                    params: {
-                        provider_id: this.user_id
-                    }
-                });
-                this.user_rating = response.data;
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/reviews/provider_rating/', {
+                        params: {
+                            provider_id: this.user_id
+                        }
+                    });
+                    this.user_rating = response.data;
+                } catch {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Не удалось загрузить рейтинг',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+                
             }
         },
         mounted() {

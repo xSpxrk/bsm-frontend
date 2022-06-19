@@ -17,6 +17,7 @@
 import ProviderNavBar from '@/components/HomeProviderView/ProviderNavBar.vue'
 import OfferMain from '@/components/HomeProviderView/OfferMain.vue'
 import axios from 'axios'
+import Swal from 'sweetalert2'
     export default {
         title: 'Мои предложения',
         components: {
@@ -32,15 +33,25 @@ import axios from 'axios'
         },
         methods: {
             async getProvider() {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/users',
-                {
-                    params: {
-                        token: localStorage.token,
-                    }
-                })
-                this.provider = response.data
-                this.offers = this.provider.offers;
-				this.offers = this.offers.reverse();
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/users',
+                    {
+                        params: {
+                            token: localStorage.token,
+                        }
+                    })
+                    this.provider = response.data
+                    this.offers = this.provider.offers;
+                    this.offers = this.offers.reverse();
+                } catch {
+                    Swal.fire({
+                            icon: 'error',
+                            title: 'Не получилось загрузить предложения',
+                            showConfirmButton: false,
+                            timer: 1000
+                            })
+                }
+                
             }
         },
         mounted() {

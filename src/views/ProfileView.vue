@@ -67,13 +67,23 @@ import {TheMask} from 'vue-the-mask'
         },
         methods: {
             async getUser() {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/users/', {
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/users/', {
                     params: {
                         token: localStorage.token,
                     }
                 });
                 this.user = response.data;
                 this.reviews = response.data.reviews.reverse()
+                } catch {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Не удалось загрузить профиль',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+                
             },
             async updateUser(){
                 try {
@@ -120,12 +130,22 @@ import {TheMask} from 'vue-the-mask'
 
             },
             async getRating() {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/reviews/rating/', {
-                    params: {
-                        token: localStorage.token
-                    }
-                });
-                this.rating = response.data;
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/reviews/rating/', {
+                        params: {
+                            token: localStorage.token
+                        }
+                    });
+                    this.rating = response.data;
+                } catch {
+                    Swal.fire({
+                                icon: 'error',
+                                title: 'Не удалось загрузить рейтинг',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                }
+                
             }
         },
         mounted() {
@@ -236,6 +256,7 @@ import {TheMask} from 'vue-the-mask'
     justify-content: flex-end;
 }
 .btn {
+    cursor: pointer;
     padding: 15px 60px;
     background: #458686;
     border-radius: 10px;

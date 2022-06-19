@@ -174,6 +174,7 @@ import axios from 'axios'
     color: #6E7080;
 }
 .arrow_img {
+    cursor: pointer;
     background: url('@/resources/images/arrow.svg') no-repeat;
     width: 55px;
 }

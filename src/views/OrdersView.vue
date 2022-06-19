@@ -21,6 +21,7 @@
 import ProviderNavBar from '@/components/HomeProviderView/ProviderNavBar.vue'
 import OrderMain from '@/components/HomeCustomerView/OrderMain.vue'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import InputItem from '@/components/UI/InputItem.vue'
     export default {
         title: 'Заказы',
@@ -41,7 +42,8 @@ import InputItem from '@/components/UI/InputItem.vue'
         },
         methods: {
             async getOrders() {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/orders', {
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/orders', {
                     params: {
                     skip: this.skip,
                     limit: this.limit,
@@ -53,11 +55,25 @@ import InputItem from '@/components/UI/InputItem.vue'
                 
                 this.skip = this.limit;
                 this.limit += 1;
-				// this.orders = this.orders.reverse();
+                } catch {
+                     Swal.fire({
+                            icon: 'error',
+                            title: 'Не получилось загрузить заказы',
+                            showConfirmButton: false,
+                            timer: 1000
+                            })
+                }
+                
+				
             },
             async getMax() {
-                const max = await axios.get('https://backend-bsm.herokuapp.com/orders/max/');
-                this.maxOrders = max.data;
+                try {
+                    const max = await axios.get('https://backend-bsm.herokuapp.com/orders/max/');
+                    this.maxOrders = max.data;
+                } catch {
+                    
+                }
+                
             }
             
         },

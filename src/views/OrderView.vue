@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 import ProviderNavBar from '@/components/HomeProviderView/ProviderNavBar.vue'
 import CustomerNavBar from '@/components/HomeCustomerView/CustomerNavBar.vue'
 import Order from '@/components/HomeCustomerView/Order.vue'
@@ -43,7 +44,8 @@ import axios from 'axios'
             ProviderNavBar,
             Order,
             Offer,
-            CreateOffer
+            CreateOffer,
+            Swal
         },
         data() {
             return {
@@ -61,26 +63,47 @@ import axios from 'axios'
                 return parseInt(this.$route.params.id);
             },
             async getOrder(id) {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/orders/' + id );
-                this.order = response.data;
-                this.offers = this.order.offers;
-                this.material = response.data.material.name;
-				this.offers = this.offers.reverse();
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/orders/' + id );
+                    this.order = response.data;
+                    this.offers = this.order.offers;
+                    this.material = response.data.material.name;
+                    this.offers = this.offers.reverse();
+                }
+                catch (error) {
+                    Swal.fire({
+                            icon: 'error',
+                            title: 'Не получилось загрузить данные о заказе и предложениях',
+                            showConfirmButton: false,
+                            timer: 1000
+                            })
+                }
+               
             },
             async createOffer(offer) {
-                const response = await axios.post('https://backend-bsm.herokuapp.com/offers/', {
-                    quantity: offer.quantity,
-                    price: offer.price,
-                    order_id: this.order.order_id,
-                    provider_id: null
-                },
-                {
-                    params: {
-                        token: localStorage.token
+                try {
+                    const response = await axios.post('https://backend-bsm.herokuapp.com/offers/', {
+                        quantity: offer.quantity,
+                        price: offer.price,
+                        order_id: this.order.order_id,
+                        provider_id: null
                     },
-                });
+                    {
+                        params: {
+                        token: localStorage.token
+                        },
+                    });
                 this.getOrder(this.$route.params.id);
                 this.offerVisible = false;
+                } catch (error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Не получилось загрузить данные о заказе и предложениях',
+                        showConfirmButton: false,
+                        timer: 1000
+                    })
+                }
+                
         
             },
             openDialog(show) {

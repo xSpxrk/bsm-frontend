@@ -72,33 +72,60 @@ import axios from 'axios'
         },
         methods: {
             async getCustomer() {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/customers/' + this.user_id);
-                this.user = response.data;
-                this.reviews = response.data.reviews.reverse()
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/customers/' + this.user_id);
+                    this.user = response.data;
+                    this.reviews = response.data.reviews.reverse()
+                } catch {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Не удалось загрузить данные заказчика',
+                        showConfirmButton: true,
+                        })
+                }
+                
             },
             openCreateFeedback() {
                 this.show = true;
             },
             async createFeedback(feedback) {
-                const response = await axios.post('https://backend-bsm.herokuapp.com/reviews', {
-                    description: feedback.description,
-                    rating: feedback.rating,
-                }, {
-                    params: {
+                try {
+                    const response = await axios.post('https://backend-bsm.herokuapp.com/reviews', {
+                        description: feedback.description,
+                        rating: feedback.rating,
+                    }, {
+                        params: {
                         token: localStorage.token,
                         user_id: this.user_id
-                    }
-                });
-                this.show = false;
-                this.getCustomer();
+                        }
+                    });
+                    this.show = false;
+                    this.getCustomer();
+                } catch {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Не удалось создать отзыв',
+                        showConfirmButton: true,
+                        })
+                }
+                
             },
             async getRating() {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/reviews/customer_rating/', {
-                    params: {
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/reviews/customer_rating/', {
+                        params: {
                         customer_id: this.user_id
-                    }
-                });
-                this.user_rating = response.data;
+                        }
+                    });
+                    this.user_rating = response.data;
+                } catch {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Не удалось загрузить оценку заказчика',
+                        showConfirmButton: true,
+                        })
+                }
+                
             }
         },
         mounted() {

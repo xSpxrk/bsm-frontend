@@ -42,7 +42,11 @@ import axios from 'axios'
                     this.offers = this.offers.slice(0, 3);
                     console.log(response)
                 } catch (error) {
-
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Не удалось загрузить последние предложения',
+                        showConfirmButton: true,
+                        })
                 }
             }
         },

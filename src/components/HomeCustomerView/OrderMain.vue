@@ -114,6 +114,7 @@ import axios from 'axios'
     margin: 0 0 0 15px;
 }
 .arrow_img {
+    cursor: pointer;
     background: url('@/resources/images/arrow.svg') no-repeat;
     width: 55px;
 }

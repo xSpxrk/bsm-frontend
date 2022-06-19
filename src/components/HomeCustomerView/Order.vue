@@ -23,6 +23,7 @@
 
 <script>
 import axios from 'axios'
+import Swal from 'sweetalert2'
     export default {
         props: {
             order: {
@@ -40,14 +41,33 @@ import axios from 'axios'
         },
         methods: {
             async getCustomer(customer_id) {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/customers/' + customer_id);
-                this.customer = response.data;
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/customers/' + customer_id);
+                    this.customer = response.data;
+                } catch (error) {
+                    Swal.fire({
+                                icon: 'error',
+                                title: 'Не получилось загрузить данные о заказчике',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                }
+                
             },
             letOffer() {
                 this.$emit('openDialog', true)
             },
             async deleteOrder() {
-                const response = await axios.delete('https://bsm-backend.herokuapp.com/orders/'+ this.order.order_id);
+                try {
+                    const response = await axios.delete('https://backend-bsm.herokuapp.com/orders/'+ this.order.order_id);
+                } catch (error) {
+                    Swal.fire({
+                                icon: 'error',
+                                title: 'Не получилось удалить заказ',
+                                showConfirmButton: false,
+                                timer: 1000
+                            })
+                }
                 this.$router.back();
                 
             }
