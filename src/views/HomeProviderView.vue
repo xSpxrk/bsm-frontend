@@ -7,7 +7,7 @@
                 <div class="items" v-if="this.offers.length > 0">
                     <offer-main v-for="offer in this.offers" :offer="offer" :key="offer.offer_id"></offer-main>
                 </div>
-                <div class="title">Последних предложений нет</div>
+                <div class="title" v-else>Последних предложений нет</div>
             </div>
         </div>
     </div>
