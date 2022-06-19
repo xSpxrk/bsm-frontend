@@ -19,10 +19,10 @@
                                 <option class="option">Цена↓</option>
                             </select>
                     </div>
-                    <div class="offers">
+                    <div class="offers" v-if="offers.length > 0">
                         <offer v-for="offer in offers" :offer="offer" :key="offer.offer_id"></offer>
                     </div>
-                    
+                    <div class="title" v-else>Список предложений пуст</div>
                 </div>
         </div>
     </div>

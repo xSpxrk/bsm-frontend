@@ -4,9 +4,10 @@
         <div class="background">
             <div class="orders">
                 <h1 class="title">Мои последние заказы</h1>
-                <div class="items">
+                <div class="items" v-if="this.orders.length > 0">
                     <order-main v-for="order in this.orders" :order="order" :key="order.order_id"></order-main>
-            </div>
+                </div>
+                <div class="title" v-else>Последних заказов нет</div>
             </div>
            
         </div>

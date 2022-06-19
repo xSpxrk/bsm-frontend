@@ -12,7 +12,7 @@
                         <h1 class="text" >Почта</h1>
                         <input-item class="input" v-model="user.email" readonly></input-item>
                         <h1 class="text">Телефон</h1>
-                        <input-item class="input" type='tel' v-model="user.phone_number"></input-item>
+                        <input-item class="input" type='tel' v-mask="'+7 (###) ###-##-##'" v-model="user.phone_number"></input-item>
                         <h1 class="text">Новый пароль</h1>
                         <input-item class="input"  v-model="this.password" type="password"></input-item>
                         <div class="footer">
@@ -27,11 +27,10 @@
                     </div>
                     <div class="feedback">
                         <h1 class="feedback__title">Отзывы</h1>
-                        <div class="scroll">
+                        <div class="scroll" v-if="this.reviews.length > 0">
                             <feedback-item v-for="review in this.reviews" :review="review" :key="review.review_id"></feedback-item>
                         </div>
-                        <!-- <div v-if="user.reviews" class="feedback__title">Список отзывов пуст</div> -->
-                        
+                        <div class="feedback__title" v-else>Список отзывов пуст</div>
                     </div>
                 </div>
                 
@@ -46,12 +45,14 @@ import CustomerNavBar from '@/components/HomeCustomerView/CustomerNavBar.vue'
 import FeedbackItem from '@/components/FeedbackView/FeedbackItem.vue'
 import Swal from 'sweetalert2'
 import axios from 'axios'
+import {TheMask} from 'vue-the-mask'
     export default {
         title: 'Мой профиль',
         components: {
             CustomerNavBar,
             ProviderNavBar,
-            FeedbackItem
+            FeedbackItem,
+            TheMask
         },
         data() {
             return {

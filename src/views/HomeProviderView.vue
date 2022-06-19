@@ -4,9 +4,10 @@
         <div class="background">
             <div class="offers">
                 <h1 class="title">Мои последние предложения</h1>
-                <div class="items">
+                <div class="items" v-if="this.offers.length > 0">
                     <offer-main v-for="offer in this.offers" :offer="offer" :key="offer.offer_id"></offer-main>
-            </div>
+                </div>
+                <div class="title">Последних предложений нет</div>
             </div>
         </div>
     </div>

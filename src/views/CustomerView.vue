@@ -29,10 +29,10 @@
                     </div>
                     <div class="feedback">
                         <h1 class="feedback__title">Отзывы</h1>
-                        <div class="scroll">
+                        <div class="scroll" v-if="this.reviews.length > 0">
                             <customer-feedback-item v-for="review in this.reviews" :review="review" :key="review.review_id"></customer-feedback-item>
                         </div>
-                        
+                        <div class="feedback__title" v-else>Список отзывов пуст</div>
                     </div>
                 </div>
                 
