@@ -7,7 +7,7 @@
         <option disabled value="" class="select">Материал</option>
         <option v-for="option in this.materials" :key="option.material_id" :value="option.material_id">{{ option.name }}</option>
         </select>
-        <input-item placeholder="Количество" type="number" v-model="order.quantity"/>
+        <input-item class="input_quantity" placeholder="Количество" type="number" v-model="order.quantity"/>
         <div class="button">
             <button-dialog class="btn" @click="createOrder">Создать</button-dialog>
         </div>
@@ -39,11 +39,22 @@ import axios from 'axios'
         },
         methods: {
             async getMaterials() {
-                const response = await axios.get('https://backend-bsm.herokuapp.com/materials/');
-                this.materials = response.data;
+                try {
+                    const response = await axios.get('https://backend-bsm.herokuapp.com/materials/');
+                    this.materials = response.data;
+                } catch {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Не удалось загрузить список материалов',
+                        showConfirmButton: false,
+                        timer: 1000
+                        })
+                }
+                
             },
             createOrder() {
                if (this.order.name != '' && this.order.name != '' && this.order.materials != '' && this.order.quantity != '') {
+                if (this.order.quantity >= 1) {
                     this.$emit('order', this.order);
                     this.order = {
                         name: '',
@@ -51,6 +62,15 @@ import axios from 'axios'
                         material_id: '',
                         quantity: ''
                     }
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Количество не может быть меньше 1',
+                        showConfirmButton: false,
+                        timer: 1000
+                        })
+                }
+                    
                } else {
                    Swal.fire({
                         icon: 'error',
@@ -106,6 +126,12 @@ import axios from 'axios'
 .btn {
    padding: 8px 100px;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 @media screen and (max-width: 425px){
     .createOrder {
     padding: 32px 10px;

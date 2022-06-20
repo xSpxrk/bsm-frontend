@@ -26,11 +26,21 @@ import Swal from 'sweetalert2'
         methods: {
             register() {
                 if (this.offer.price != '' && this.offer.count != '') {
-                    this.$emit('offer', this.offer),
+                    if (this.offer.count >= 1) {
+                        this.$emit('offer', this.offer),
                         this.usofferer = {
                             price: '',
                             quantity: ''
                         }
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Количество не может быть меньше 1',
+                            showConfirmButton: false,
+                            timer: 1000
+                        })
+                    }
+                    
                 } else {
                     Swal.fire({
                         icon: 'error',
@@ -82,6 +92,11 @@ import Swal from 'sweetalert2'
     font-size: 24px;
     line-height: 29px;
     color: #3F4155;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 @media screen and (max-width: 1024px) {
     .offerDialog {
