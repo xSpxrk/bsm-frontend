@@ -7,7 +7,7 @@
         <option disabled value="" class="select">Материал</option>
         <option v-for="option in this.materials" :key="option.material_id" :value="option.material_id">{{ option.name }}</option>
         </select>
-        <input-item placeholder="Количество" v-model="order.quantity"/>
+        <input-item placeholder="Количество" type="number" v-model="order.quantity"/>
         <div class="button">
             <button-dialog class="btn" @click="createOrder">Создать</button-dialog>
         </div>

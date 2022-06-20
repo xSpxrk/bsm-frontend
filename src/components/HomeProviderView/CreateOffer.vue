@@ -2,7 +2,7 @@
     <div class="offerDialog">
         <h1 class="header">Добавить предложение</h1>
         <input-item placeholder="Цена" v-model="offer.price"/>
-        <input-item placeholder="Количество" type="email" v-model="offer.quantity"/>
+        <input-item placeholder="Количество" type="number" v-model="offer.quantity"/>
         <div class="button">
             <button-dialog class="btn" @click="register">Добавить</button-dialog>
         </div>
