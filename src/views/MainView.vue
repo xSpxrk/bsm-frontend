@@ -85,7 +85,7 @@ import ResetPasswordDialog from '@/components/MainView/ResetPasswordDialog.vue'
                         else {
                             Swal.fire({
                             icon: 'error',
-                            title: error.response.data.detail,
+                            title: 'Неизвестная ошибка',
                             showConfirmButton: false,
                             timer: 1500
                             })
