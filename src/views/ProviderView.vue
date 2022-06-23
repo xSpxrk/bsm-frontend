@@ -98,11 +98,12 @@ import axios from 'axios'
                         }
                     });
                     this.show = false;
-                    this.getProvider();
-                    Swal.fire({
+                     Swal.fire({
                         icon: 'success',
                         title: 'Отзыв успешно создан',
                     })
+                    this.getProvider();
+                   
                 } catch {
                     Swal.fire({
                         icon: 'error',

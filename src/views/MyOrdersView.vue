@@ -82,7 +82,7 @@ import axios from 'axios'
 }
 .title {
     width: 100%;
-    font-family: 'Inter';
+    font-family: 'Balsamiq Sans';
     font-style: normal;
     font-weight: 400;
     font-size: 50px;

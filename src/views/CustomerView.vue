@@ -100,7 +100,12 @@ import axios from 'axios'
                         }
                     });
                     this.show = false;
+                     Swal.fire({
+                        icon: 'success',
+                        title: 'Отзыв успешно создан',
+                });
                     this.getCustomer();
+                   
                 } catch {
                     Swal.fire({
                         icon: 'error',
