@@ -25,10 +25,10 @@ import Swal from 'sweetalert2'
         },
         methods: {
             register() {
-                if (this.offer.price != '' && this.offer.count != '') {
-                    if (this.offer.count >= 1) {
+                if (this.offer.price != '' && this.offer.quantity != '') {
+                    if (this.offer.quantity > 0) {
                         this.$emit('offer', this.offer),
-                        this.usofferer = {
+                        this.offer = {
                             price: '',
                             quantity: ''
                         }

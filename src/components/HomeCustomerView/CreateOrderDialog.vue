@@ -53,8 +53,8 @@ import axios from 'axios'
                 
             },
             createOrder() {
-               if (this.order.name != '' && this.order.name != '' && this.order.materials != '' && this.order.quantity != '') {
-                if (this.order.quantity >= 1) {
+               if (this.order.name != '' && this.order.name != '' && this.materials != '' && this.order.quantity != '') {
+                if (this.order.quantity > 0) {
                     this.$emit('order', this.order);
                     this.order = {
                         name: '',
