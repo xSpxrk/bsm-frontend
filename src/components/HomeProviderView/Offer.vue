@@ -218,5 +218,15 @@ import axios from 'axios'
     .offer {
         padding: 10px;
     }
+    .header {
+        flex-direction: column;
+    }
+    .name {
+        align-self: flex-start;
+    }
+    .name_provider {
+        align-self: flex-start;
+        margin: 0;
+    }
 }
 </style>

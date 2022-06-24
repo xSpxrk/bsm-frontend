@@ -214,10 +214,16 @@ import Swal from 'sweetalert2'
         border-radius: 4px;
         padding: 10px;
     }
+    .title {
+        flex-direction: column;
+    }
+    .btn {
+        text-align: center;
+    }
 }
 @media screen and (max-width: 330px) {
     .btn {
-        font-size: 10px;
+        font-size: 20px;
     }
 }
 
